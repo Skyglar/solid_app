@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
@@ -20,12 +21,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          String color = generateRandomHexColor();
-          print('$color');
           setState(() {
-            _color = Color(int.parse('$color'));
+            _color = Color.fromARGB(
+                random.nextInt(255),
+                random.nextInt(255),
+                random.nextInt(255),
+                random.nextInt(255));
           });
-          print('clicked');
         },
         child: SizedBox.expand(
           child: AnimatedContainer(
@@ -34,7 +36,7 @@ class _HomeState extends State<Home> {
             child: Center(
               child: Text(
                 'HELLo THERE',
-                style: TextStyle(
+                  style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Starjedi',
@@ -65,14 +67,5 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-  }
-
-  String generateRandomHexColor(){
-    int length = 8;
-    String chars = '0123456789ABCDEF';
-    String hex = '0x';
-    while(length-- > 0) hex += chars[(random.nextInt(16)) | 0];
-
-    return hex;
   }
 }
